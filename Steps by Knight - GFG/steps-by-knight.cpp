@@ -52,13 +52,15 @@ class Solution
 	               int nexti = p.first + stepsi[i];
 	               int nextj = p.second + stepsj[i];
 	               
-	              if(isValid(nexti, nextj, N, visited))
-	              {
-	                  if(nexti == tx && nextj == ty)
+	                if(nexti == tx && nextj == ty)
 	                  {
 	                      return ans;
 	                  }
 	                  
+	               
+	              if(isValid(nexti, nextj, N, visited))
+	              {
+	                 
 	                  q.push({nexti, nextj});
 	                  visited[nexti][nextj] = true;
 	              }
