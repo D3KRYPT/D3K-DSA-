@@ -7,6 +7,8 @@ public:
         {
             return -1;
         }
+        if(start == end)
+            return 1;
         
         queue<string> q;
         q.push(start);
@@ -21,10 +23,9 @@ public:
             {
                 string curr = q.front();
                 q.pop();
-                if(curr == end)
-                    return ans;
                 
-                for(int i = 0; i < curr.length(); i++)
+                
+                for(int i = 0; i < 8; i++)
                 {
                     string temp = curr;
                     for(int j = 0; j < 4; j++)
