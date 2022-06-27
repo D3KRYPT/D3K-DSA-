@@ -1,35 +1,50 @@
 class Solution {
 public:
     int minMutation(string start, string end, vector<string>& bank) {
-         vector<char> mut = {'A','C','G','T'};
-        unordered_set<string> dict(bank.begin(),bank.end());
-        if(dict.find(end)==dict.end()) 
+        unordered_set<string> s(bank.begin(), bank.end());
+        
+        if(s.find(end) == s.end())
+        {
             return -1;
-        int ans = 0;
+        }
+        
         queue<string> q;
         q.push(start);
         
-        while(!q.empty()) {
+        int ans = 0;
+        char arr[4] = {'A', 'C', 'G', 'T'};
+        while(!q.empty())
+        {
             int n = q.size();
-            for(int i=0;i<n;i++) {
+            ans++;
+            while(n--)
+            {
                 string curr = q.front();
                 q.pop();
-                if(curr==end) 
+                if(curr == end)
                     return ans;
-                dict.erase(curr);
-                for(int j=0;j<8;j++) {
-                    char c = curr[j];
-                    for(int k=0;k<4;k++) {
-                        curr[j] = mut[k];
-                        if(dict.find(curr)!=dict.end())
-                            q.push(curr);
+                
+                for(int i = 0; i < curr.length(); i++)
+                {
+                    string temp = curr;
+                    for(int j = 0; j < 4; j++)
+                    {
+                        temp[i] = arr[j];
+                        
+                        
+                        if(temp.compare(curr) == 0)
+                            continue;
+                        if(temp.compare(end) == 0)
+                            return ans ;
+                        if(s.find(temp) != s.end())
+                        {
+                            q.push(temp);
+                            s.erase(temp);
+                        }
                     }
-                    curr[j] = c;
                 }
             }
-            ans++;
         }
-        
         return -1;
     }
 };
