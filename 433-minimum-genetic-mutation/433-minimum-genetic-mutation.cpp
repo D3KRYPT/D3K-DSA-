@@ -32,8 +32,8 @@ public:
                         temp[i] = arr[j];
                         
                         
-                        if(temp.compare(curr) == 0)
-                            continue;
+                        /*if(temp.compare(curr) == 0)
+                            continue;*/
                         if(temp.compare(end) == 0)
                             return ans ;
                         if(s.find(temp) != s.end())
