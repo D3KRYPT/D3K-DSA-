@@ -35,7 +35,7 @@ public:
                     {
                         temp[j] = l;
                         
-                        if(cur.compare(temp) == 0)
+                        if(temp.compare(cur) == 0)
                             continue;
                         if(endWord.compare(temp) == 0)
                             return (depth + 1);
