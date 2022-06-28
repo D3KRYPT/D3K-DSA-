@@ -7,20 +7,21 @@ using namespace std;
 class Solution
 {
     public:
+    typedef long long ll;
     //Function to find the next greater element for each element of the array.
-    vector<long long> nextLargerElement(vector<long long> arr, int n){
-       stack<long long> s;
+    vector<ll> nextLargerElement(vector<long long> arr, int n){
+       stack<ll> s;
        s.push(arr[n-1]);
-       vector<long long> ans(n);
+       vector<ll> ans(n);
        ans[n-1] = -1;
        
-       for(long long i = n - 2; i >= 0; i--)
+       for(ll i = n - 2; i >= 0; i--)
        {
            while(!s.empty() && s.top() < arr[i])
            {
                s.pop();
            }
-           long long ele = s.empty() ? -1 : s.top();
+           ll ele = s.empty() ? -1 : s.top();
            ans[i] = ele;
            
            s.push(arr[i]);
