@@ -17,7 +17,7 @@ class Solution
        
        for(ll i = n - 2; i >= 0; i--)
        {
-           while(!s.empty() && s.top() < arr[i])
+           while(!s.empty() && s.top() <= arr[i])
            {
                s.pop();
            }
