@@ -13,10 +13,9 @@ class Solution
     {
         if(M[a][b] == 1)
         {
-            return true;
+            return M[a][b];
         }
-        return false;
-    }
+     }
     public:
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) 
@@ -26,8 +25,8 @@ class Solution
        {
            s.push(i);
        }
-        
-        while(s.size() > 1)
+        int count  = 0;
+        while(count < (n - 1))
         {
             int a = s.top(); s.pop();
             int b = s.top(); s.pop();
@@ -36,25 +35,28 @@ class Solution
                 s.push(b);
             else
                 s.push(a);
+                
+            count++;
         }
         
-        //now, there is a single element left in the stack, which is the 
-        //potential element to become the clebrity
         
-        int celeb = s.top();
-        int rcount = 0, ccount = 0;
-        bool rowcheck, colcheck;
+      //now, the single element left is the potential canditate to become the celebrity
+      
+      int celeb = s.top();
+      
+      int rcount = 0, ccount = 0;
+      
+      for(int i = 0; i < n; i++)
+      {
+          if(M[celeb][i] == 0) rcount++;
+          if(M[i][celeb] == 1) ccount++;
+      }
+      
+      if(rcount == n && ccount == (n - 1))
+        return celeb;
+      return -1;
         
-        for(int i = 0; i < n; i++)
-        {
-            if(M[celeb][i] == 0) rcount++; // this is to check the celebrity row 
-           
-            if(M[i][celeb] == 1) ccount++;//this is to check for the celebrity column
-        }
-        
-        if(rcount == n && ccount == (n - 1)) return celeb;
-        
-        return -1;
+       
 
     }
 };
