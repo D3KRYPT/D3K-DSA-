@@ -9,33 +9,53 @@ using namespace std;
 
 class Solution 
 {
+    bool knows(vector<vector<int> >& M, int n, int a, int b)
+    {
+        if(M[a][b] == 1)
+        {
+            return true;
+        }
+        return false;
+    }
     public:
     //Function to find if there is a celebrity in the party or not.
-    int celebrity(vector<vector<int> >& m, int n) 
+    int celebrity(vector<vector<int> >& M, int n) 
     {
-        // code here 
-        vector<int> in(n, 0), out(n, 0);
+        stack<int> s;
+       for(int i = 0; i < n; i++)
+       {
+           s.push(i);
+       }
+        
+        while(s.size() > 1)
+        {
+            int a = s.top(); s.pop();
+            int b = s.top(); s.pop();
+            
+            if(knows(M, n, a ,b))
+                s.push(b);
+            else
+                s.push(a);
+        }
+        
+        //now, there is a single element left in the stack, which is the 
+        //potential element to become the clebrity
+        
+        int celeb = s.top();
+        int rcount = 0, ccount = 0;
+        bool rowcheck, colcheck;
         
         for(int i = 0; i < n; i++)
         {
-            for(int j = 0; j < n; j++)
-            {
-                if(m[i][j] == 1)
-                {
-                    in[j]++;
-                    out[i]++;
-                }
-            }
+            if(M[celeb][i] == 0) rcount++; // this is to check the celebrity row 
+           
+            if(M[i][celeb] == 1) ccount++;//this is to check for the celebrity column
         }
         
-        for(int i = 0; i < n; i++)
-        {
-            if(in[i] == n - 1 && out[i] == 0)
-            {
-                return i;
-            }
-        }
+        if(rcount == n && ccount == (n - 1)) return celeb;
+        
         return -1;
+
     }
 };
 
