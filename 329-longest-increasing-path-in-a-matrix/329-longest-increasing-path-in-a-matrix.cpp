@@ -1,7 +1,6 @@
 class Solution {
 public:
-    int stepsi[4] = {1, -1, 0, 0};
-    int stepsj[4] = {0, 0, -1, 1};
+  
     
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         int n = matrix.size();
