@@ -10,7 +10,7 @@ class Solution {
    //const long long mod = 10e9 + 7;
     long long int nthFibonacci(long long int n){
       
-         long long int mod=1e9+7;
+        const long long int mod=1e9+7;
        vector<int>dp(n+1);
        dp[0]=0;
        dp[1]=1;
