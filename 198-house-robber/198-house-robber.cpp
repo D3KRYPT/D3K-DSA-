@@ -2,15 +2,20 @@ class Solution {
 public:
     int  calculate(int ind, vector <int> &nums, vector <int> &dp)
     {
-        if(ind == 0) return nums[0];
-        if(ind < 0)  return 0;
+        int n = nums.size();
+        dp[0] = nums[0];
+        int neg = 0;
         
-        if(dp[ind] != -1) return dp[ind];
-        
-        int rob = nums[ind] + calculate(ind - 2, nums, dp);
-        int notRob = calculate(ind - 1, nums, dp);
-        
-        return dp[ind] = max(rob, notRob);
+        for(int i = 1; i < n; i++)
+        {
+            int rob = nums[i];
+            if(i > 1) rob += dp[i - 2];
+            
+            int notRob = dp[i - 1];
+            
+            dp[i] = max(rob, notRob);
+        }
+        return dp[n-1];
     }
     
     int rob(vector<int>& nums) {
