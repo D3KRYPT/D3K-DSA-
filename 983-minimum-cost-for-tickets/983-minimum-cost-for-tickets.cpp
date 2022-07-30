@@ -1,28 +1,23 @@
 class Solution {
-    int find(int n, int ind, vector<int> &days, vector<int> &cost, vector<int> &dp)
-    {
-        if(ind >= n) return 0;
-      //1day
-        
-        if(dp[ind] != -1) return dp[ind];
-        int option1 = cost[0] + find(n, ind+1, days, cost, dp);
-        
-        //7day
-        int i;
-        for(i = ind; i < n && days[i] < days[ind] + 7; i++);
-        
-        int option2 = cost[1] + find(n, i, days, cost, dp);
-        //30days
-        for(i = ind; i < n && days[i] < days[ind] + 30; i++);
-        
-        int option3 = cost[2] + find(n, i, days, cost, dp);
-        
-        return dp[ind] = min(option1, min(option2, option3));
-    }
 public:
     int mincostTickets(vector<int>& days, vector<int>& costs) {
-       int n = days.size();
-        vector<int> dp(n, -1);
-        return find(n, 0, days, costs, dp);
+      unordered_map<int,int> tickets;
+        tickets[1] = costs[0];
+        tickets[7] = costs[1];
+        tickets[30] = costs[2];
+        
+        vector<int> dp(366, INT_MAX);
+        dp[0] = 0;
+        for(int i=1; i<366; ++i){
+            if(find(days.begin(), days.end(), i) == days.end()){
+                dp[i] = dp[i-1];
+                continue;
+            }
+            for(auto ticket : tickets){
+                dp[i] = min(dp[i], dp[max(0, i-ticket.first)] + ticket.second);
+            }
+        }
+        
+        return dp[365];  
     }
 };
