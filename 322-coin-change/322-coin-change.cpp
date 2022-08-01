@@ -1,32 +1,22 @@
 class Solution {
-private:
-    int find(int ind, vector<int> &coins, int targ, vector<vector<int>> &dp)
-    {   //if(targ == 0) return 1;
-        if(ind == 0)
-        {
-            if(targ % coins[0] == 0) 
-                return targ / coins[0];
-            else
-                return 1e9;
-        }
-        
-        if(dp[ind][targ] != -1) return dp[ind][targ];
-        int notTake = 0 + find(ind-1, coins, targ, dp);
-        int take = INT_MAX;
-        if(targ >= coins[ind])
-        {
-            take = 1 + find(ind, coins, targ - coins[ind], dp);
-        }
-        return dp[ind][targ] = min(take, notTake);
-    }
 public:
-    int coinChange(vector<int>& coins, int amount) {
-        
-        int n = coins.size();
-        vector<vector<int>> dp(n, vector<int>(amount+1, -1));
-        int ans = find(n-1, coins, amount, dp);
-        if(ans == 1e9)return -1;
-        return ans;
+    int coinChange(vector<int>& coins, int n) {
+        // creating the base dp array, with first value set to 0
+        int dp[n + 1];
+        dp[0] = 0;
+        // more convenient to have the coins sorted
+        sort(begin(coins), end(coins));
+        // populating our dp array
+        for (int i = 1; i <= n; i++) {
+            // setting dp[0] base value to 1, 0 for all the rest
+            dp[i] = INT_MAX;
+            for (int c: coins) {
+                if (i - c < 0) break;
+                // if it was a previously not reached cell, we do not add use it
+                if (dp[i - c] != INT_MAX) dp[i] = min(dp[i], 1 + dp[i - c]);
+            }
+        }
+        return dp[n] == INT_MAX ? -1 : dp[n];
         
     }
 };
