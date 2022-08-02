@@ -1,4 +1,5 @@
 class Solution {
+    typedef pair<int,int> pp;
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         unordered_map<int, int> mp;
@@ -7,7 +8,7 @@ public:
         {
             mp[nums[i]]++;
         }
-        priority_queue<pair<int, int> , vector<pair<int, int>>, greater<pair<int, int>>> minH;
+        priority_queue<pp , vector<pp>, greater<pp>> minH;
         vector<int> ans;
         for(auto it = mp.begin(); it != mp.end(); it++)
         {
