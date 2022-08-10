@@ -11,9 +11,8 @@ public:
                 else if (sum<pq.top().first) {
                     pq.pop();
                     pq.push({sum,{nums1[i],nums2[j]}});
-                } else {
-                    break;  
-                }
+                } else
+                    break;
             }
         }
         vector<vector<int>> ans;
