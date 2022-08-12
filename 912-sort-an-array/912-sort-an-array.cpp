@@ -1,8 +1,19 @@
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        priority_queue<int, vector<int>, greater<int>> pq;
+        vector<int> ans;
         
-        return nums;
+        for(auto it : nums)
+        {
+            pq.push(it);
+        }
+        while(!pq.empty())
+        {
+            ans.push_back(pq.top());
+            pq.pop();
+        }
+        
+        return ans;
     }
 };
