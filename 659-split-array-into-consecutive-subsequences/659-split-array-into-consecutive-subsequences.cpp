@@ -11,7 +11,7 @@ public:
             if(mp[it] == 0)
                 continue;
             int freq = mp[it] , curr = it , count = 0;
-            while(mp.count(curr) && mp[curr] >= freq)
+            while(mp[curr] >= freq)
             {
                 freq = max(freq,mp[curr]);
                 mp[curr]--;
