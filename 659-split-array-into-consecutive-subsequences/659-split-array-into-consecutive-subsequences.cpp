@@ -13,7 +13,7 @@ public:
             int freq = mp[it] , curr = it , count = 0;
             while(mp.count(curr) && mp[curr] >= freq)
             {
-                freq = fmax(freq,mp[curr]);
+                freq = max(freq,mp[curr]);
                 mp[curr]--;
                 count++;
                 curr++;
