@@ -9,13 +9,13 @@ public:
         for(auto &it : arr)
             um[it]++;
         
-        priority_queue<pair<int, int>> pq;
+        priority_queue<int> pq;
         
         for(int i = 0; i < um.size(); i++)
         {
             if(um[i] != 0)
             {
-                pq.push({um[i], i});
+                pq.push(um[i]);
             }
         }
         int count = 0;
@@ -24,7 +24,7 @@ public:
         while(!pq.empty())
         {
             //int topEle = pq.top();
-            targetToReach = targetToReach + pq.top().first;
+            targetToReach = targetToReach + pq.top();
             count++;
             
             if(targetToReach >= target)
