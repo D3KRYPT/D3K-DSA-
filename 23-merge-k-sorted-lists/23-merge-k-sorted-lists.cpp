@@ -18,7 +18,8 @@ public:
 ListNode *mergeKLists(vector<ListNode *> &lists) { //priority_queue
     priority_queue<ListNode *, vector<ListNode *>, compare> q;
     for(auto l : lists) {
-        if(l)  q.push(l);
+        if(l)
+            q.push(l);
     }
     if(q.empty())  return NULL;
 
