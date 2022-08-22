@@ -5,11 +5,11 @@ public:
         int m = matrix[0].size();
         
         int start = 0, end = (n * m) - 1;
-        //int mid;
+        int mid;
         
         while(start <= end)
         {
-            int mid = (start + (end - start)/2);
+            mid = (start + (end - start)/2);
             
             if(matrix[mid / m][mid % m] == target)
                 return true;
