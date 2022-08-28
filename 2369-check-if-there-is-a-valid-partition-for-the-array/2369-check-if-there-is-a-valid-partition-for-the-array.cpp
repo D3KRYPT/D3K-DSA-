@@ -14,14 +14,14 @@ public:
         {
             if(find(nums, ind + 2, dp))
             {
-                return true;
+                return dp[ind] = true;
             }
             
             if(ind + 2 < n && nums[ind] == nums[ind + 2])
             {
                 if(find(nums, ind + 3, dp))
                 { 
-                    return true;
+                    return dp[ind] = true;
                 }
             }
         }
@@ -29,7 +29,7 @@ public:
         if( ind + 2 < n && nums[ind + 1] == nums[ind] + 1 && nums[ind + 2] == nums[ind] + 2)
         {
             if(find(nums, ind + 3, dp))
-                return true;
+                return dp[ind] = true;
         }
         
         return dp[ind] = false; 
