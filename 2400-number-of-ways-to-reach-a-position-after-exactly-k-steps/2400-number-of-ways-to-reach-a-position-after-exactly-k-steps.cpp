@@ -24,7 +24,7 @@ class Solution {
 public:
     int numberOfWays(int startPos, int endPos, int k) {
         
-        vector<vector<int>> dp(4001, vector<int>(k +10, -1));
+        vector<vector<int>> dp(4001, vector<int>(k + 10, -1));
         return find( endPos, k, startPos, dp);
     }
 };
