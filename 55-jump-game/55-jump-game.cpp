@@ -1,13 +1,31 @@
 class Solution {
+private:
+    bool find(int pointer, int n, vector <int> &nums, vector<int> &dp)
+    {
+        if(pointer == n - 1)
+            return true;
+        
+        if(dp[pointer] != -1)
+            return dp[pointer];
+        
+        for(int i = 1; i <= nums[pointer]; i++)
+        {
+            if(find(pointer + i, n, nums, dp))
+            {
+                //cout << cnt << " ";
+                return dp[pointer] = true;
+            }
+        }
+        
+        return dp[pointer] = false;
+    }
 public:
     bool canJump(vector<int>& nums) {
         int n = nums.size();
-        int reachable = 0;
-        for(int i = 0; i < n; i++)
-        {
-            if( i > reachable) return false;
-            reachable = max(reachable , i + nums[i]);
-        }
-        return true;
+        int pointer = 0, curr = 0,cnt = 0;
+        vector<int> dp(n, -1);
+        bool ans = find(pointer, n, nums, dp);
+        cout << cnt;
+        return ans;
     }
 };
