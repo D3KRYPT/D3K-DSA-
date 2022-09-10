@@ -14,7 +14,7 @@ public:
         if(pv == sv)
            res.push_back(0);
 
-        for(int i = p.size(); i < s.size(); ++i) 
+        for(int i = p.size(); i < s.size(); i++) 
         {
               
             sv[s[i]-'a']++;
