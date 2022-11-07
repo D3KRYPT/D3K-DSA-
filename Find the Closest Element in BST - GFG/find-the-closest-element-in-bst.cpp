@@ -22,31 +22,35 @@ struct Node {
 
 class Solution
 {
+    void func(Node* root, int k, int &mini)
+    {
+        if(root == NULL)
+            return;
+        
+        if(root -> data == k)
+        {
+            mini = 0;
+            return;
+        }
+        
+        mini = min(mini, abs((root -> data) - k));
+        
+        if(k < root -> data)
+            func(root -> left, k, mini);
+        else
+            func(root -> right, k, mini);
+    }
     public:
     //Function to find the least absolute difference between any node
 	//value of the BST and the given integer.
     int minDiff(Node *root, int K)
     {
         //Your code here
-        queue < Node*> q;
-        q.push(root);
+        int k = K;
         int mini = INT_MAX;
-        while(!q.empty())
-        {
-            int size = q.size();
+        
+        func(root, k, mini);
             
-            for(int i = 0; i < size; i++)
-            {
-                auto it = q.front();
-                q.pop();
-                mini = min(mini, abs((it -> data) - K));
-                
-                if(it -> left)
-                    q.push(it -> left);
-                if(it -> right)
-                    q.push(it -> right);
-            }
-        }
         return mini;
     }
 };
